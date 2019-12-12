@@ -1,0 +1,17 @@
+# hide extra
+node_modules/
+trash
+
+# secrets
+secret.js
+config/secret.js
+secret
+.env
+
+#vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
