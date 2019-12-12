@@ -17,6 +17,6 @@ To add and remove comments on media. Build created from scratch.
 - [X] Server compiles to TypeScript.
 - [X] Server runs using Nodemon.
 - [X] Using *concurrently*, TypeScript --watch and Nodemon runs at the same time, successfully compiling TypeScript and running server.
-- [ ] Test Hello World GraphQl implementation functional.
+- [X] Test Hello World GraphQl implementation functional.
 
 ...More to come as progress continues.
