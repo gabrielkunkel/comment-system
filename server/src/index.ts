@@ -1,5 +1,5 @@
-import express from "express";
-import graphqlHTTP from "express-graphql";
+import express = require("express");
+import graphqlHTTP = require("express-graphql");
 import { buildSchema } from "graphql";
 
 // create schema for graphql
@@ -27,7 +27,11 @@ app.use("/graphql", graphqlHTTP({
     schema,
 }));
 
-app.listen(port, () => {
-    console.log( `server started at http://localhost:${ port }` );
-    console.log( `GraphQL api at /graphql`);
-} );
+if (!module.parent) {
+    app.listen(port, () => {
+        console.log( `server started at http://localhost:${ port }` );
+        console.log( `GraphQL api at /graphql`);
+    });
+}
+
+export default app;
