@@ -3,9 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const express_graphql_1 = __importDefault(require("express-graphql"));
+const express = require("express");
+const graphqlHTTP = require("express-graphql");
 const graphql_1 = require("graphql");
+const mongoose = require("mongoose");
+const comments_1 = __importDefault(require("./comments"));
+mongoose.connect("mongodb://localhost:27017/graphqlcomments", { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 // create schema for graphql
 const schema = graphql_1.buildSchema(`
     type Query {
@@ -16,18 +21,21 @@ const schema = graphql_1.buildSchema(`
 const rootValue = {
     hello: () => "Hello world!",
 };
-const app = express_1.default();
+const app = express();
 const port = 8080;
 app.get("/", (req, res) => {
     res.send("Hello world! Hello mars!");
 });
-app.use("/graphql", express_graphql_1.default({
+app.use("/graphql", graphqlHTTP({
     graphiql: true,
     rootValue,
     schema,
 }));
-app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}`);
-    console.log(`GraphQL api at /graphql`);
-});
+app.use("/comments", comments_1.default);
+if (!module.parent) {
+    app.listen(port, () => {
+        console.log(`server started at http://localhost:${port}`);
+    });
+}
+exports.default = app;
 //# sourceMappingURL=index.js.map
