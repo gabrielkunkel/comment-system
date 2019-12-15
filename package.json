@@ -4,7 +4,7 @@
   "description": "a tested node graphql server",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --watch --watch-extensions ts --require ts-node/register ./server/test/*.ts",
+    "test": "mocha --watch --watch-extensions ts --require ts-node/register ./server/**/*.ts",
     "build": "cd server && tsc --watch",
     "server": "nodemon ./server/dist/index.js",
     "start": "concurrently \"npm run build\" \"npm run server\""

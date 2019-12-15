@@ -11,15 +11,15 @@ interface IComment {
 }
 
 // mongoose schema
-// const CommentSchema = new Schema({
-//     _id: String,
-//     author: String,
-//     text: String
-// }, {
-//     timestamps: true
-// });
+const CommentSchema = new Schema({
+    _id: String,
+    author: String,
+    text: String
+}, {
+    timestamps: true
+});
 
-// const Comment = models.Comment || model("Comment", CommentSchema);
+export const Comment = models.Comment || model("Comment", CommentSchema);
 
 // gaphql schema
 const schema = buildSchema(`
@@ -44,29 +44,18 @@ const schema = buildSchema(`
 // rootValue
 const root = {
     createOrUpdateComment: ({input}: { input: IComment }) => {
-        // let commentToProcess;
-        // if (!input._id) {
-        //     commentToProcess = Object.assign({}, { _id: uuidv4() }, input);
-        // } else {
-        //     commentToProcess = input;
-        // }
+        let commentToProcess: IComment;
+        if (!input._id) {
+            commentToProcess = Object.assign({}, { _id: uuidv4() }, input);
+        } else {
+            commentToProcess = input;
+        }
 
-        // console.log("commentToProcess: ", commentToProcess);
-
-        // Comment.findOneAndUpdate(
-        //     { _id: commentToProcess._id},
-        //     commentToProcess,
-        //     // @ts-ignore
-        //     { new: true, useFindAndModify: false },
-        //     (err: any, doc: IComment) => {
-        //         return doc;
-        //     });
-
-        return {
-            _id: "here is _id",
-            author: input.author,
-            text: input.text
-        };
+        return Comment.findOneAndUpdate(
+            { _id: commentToProcess._id},
+            commentToProcess,
+            // @ts-ignore
+            { new: true, useFindAndModify: false, upsert: true }).exec();
     },
     getComment: ({_id}: {_id: string}) => {
         return {
