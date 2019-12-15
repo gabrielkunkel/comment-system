@@ -4,7 +4,7 @@ import { model, models, Schema } from "mongoose";
 import uuidv4 = require("uuid/v4");
 
 // Comment Interface
-interface IComment {
+export interface IComment {
     _id?: string;
     author: string;
     text: string;
@@ -34,7 +34,7 @@ const schema = buildSchema(`
         text: String
     }
     type Query {
-        getComment(_id: String): Comment
+        comment(_id: String): Comment
     }
     type Mutation {
         createOrUpdateComment(input: CommentInput): Comment
@@ -57,13 +57,10 @@ const root = {
             // @ts-ignore
             { new: true, useFindAndModify: false, upsert: true }).exec();
     },
-    getComment: ({_id}: {_id: string}) => {
-        return {
-            _id,
-            author: "random author",
-            text: "random text"
-        };
+    comment: ({_id}: {_id: string}) => {
+        return Comment.findOne({_id}).exec();
     }
+
 };
 
 export default graphqlHTTP({
