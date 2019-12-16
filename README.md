@@ -20,10 +20,17 @@ To add and remove comments on media. Build created from scratch.
 - [X] Connect to local MongoDB with Mongoose.
 - [X] Get basic passing test for GraphQL
 
-### Create Mongoose/GraphQL API
+### Create Mongoose/GraphQL API using buildSchema
 #### Get passing test on...
 - [X] A new comment will be added to the database and returned.
+- [X] If no _id is included in the new comment record, a uuid will be created for it.
 - [X] A single comment can be retrieved by _id.
+- [X] All comments may be requested from the database.
+
+### Create Mongoose/GraphQL API using GraphQLSchema
+#### Get passing test on...
+- [ ] A new comment will be added to the database and returned.
+- [ ] A single comment can be retrieved by _id.
 - [ ] All comments may be requested from the database.
 
 ...More to come as progress continues.

@@ -34,7 +34,7 @@ const schema = buildSchema(`
         text: String
     }
     type Query {
-        comment(_id: String): Comment
+        comment(_id: String): [Comment]
     }
     type Mutation {
         createOrUpdateComment(input: CommentInput): Comment
@@ -58,7 +58,15 @@ const root = {
             { new: true, useFindAndModify: false, upsert: true }).exec();
     },
     comment: ({_id}: {_id: string}) => {
-        return Comment.findOne({_id}).exec();
+        if (_id) {
+            return Comment.findOne({_id}).exec().then((response) => {
+                return [response];
+            });
+        } else {
+            return Comment.find({}).exec().then((response) => {
+                return response;
+            });
+        }
     }
 
 };
