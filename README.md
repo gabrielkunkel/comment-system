@@ -29,8 +29,7 @@ To add and remove comments on media. Build created from scratch.
 
 ### Create Mongoose/GraphQL API using GraphQLSchema
 #### Per [this advice](https://stackoverflow.com/a/53987189/4339638), get passing test on...
-- [ ] A new comment will be added to the database and returned.
-- [ ] A single comment can be retrieved by _id.
-- [ ] All comments may be requested from the database.
-
-...More to come as progress continues.
+- [X] A new comment will be added to the database and returned.
+- [X] If no _id is included in the new comment record, a uuid will be created for it.
+- [X] A single comment can be retrieved by _id.
+- [X] All comments may be requested from the database.
