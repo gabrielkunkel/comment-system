@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import request = require("supertest");
 import app from "../src";
-import { Comment, IComment } from "../src/comments";
+import { Comment, IComment } from "../src/commentModel";
 
 describe("graphQl comments test", () => {
 

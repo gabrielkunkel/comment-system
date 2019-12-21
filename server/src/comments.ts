@@ -1,25 +1,7 @@
 import graphqlHTTP = require("express-graphql");
 import { buildSchema } from "graphql";
-import { model, models, Schema } from "mongoose";
 import uuidv4 = require("uuid/v4");
-
-// Comment Interface
-export interface IComment {
-    _id?: string;
-    author: string;
-    text: string;
-}
-
-// mongoose schema
-const CommentSchema = new Schema({
-    _id: String,
-    author: String,
-    text: String
-}, {
-    timestamps: true
-});
-
-export const Comment = models.Comment || model("Comment", CommentSchema);
+import { Comment, IComment } from "./commentModel";
 
 // gaphql schema
 const schema = buildSchema(`

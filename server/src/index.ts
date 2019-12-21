@@ -3,6 +3,7 @@ import graphqlHTTP = require("express-graphql");
 import { buildSchema } from "graphql";
 import mongoose = require("mongoose");
 import comments from "./comments";
+import commentsplus from "./commentsPlus";
 
 mongoose.connect("mongodb://localhost:27017/graphqlcomments", { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
@@ -34,6 +35,7 @@ app.use("/graphql", graphqlHTTP({
 }));
 
 app.use("/comments", comments);
+app.use("/commentsplus", commentsplus);
 
 if (!module.parent) {
     app.listen(port, () => {
